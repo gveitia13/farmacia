@@ -1,0 +1,59 @@
+{% extends 'core/base.html' %}
+{% load static %}
+
+{% block header %}
+    {% include 'core/header.html' %}
+{% endblock %}
+
+{% block hero_section %}
+    {% include 'core/components/hero.html' %}
+{% endblock %}
+
+<main id="main">
+    {% block main %}
+        {% block about %}
+            {#            {% include 'core/components/about.html' %}#}
+        {% endblock %}
+
+        {% block form-pastilla %}
+            {% include 'core/components/form-pastilla.html' %}
+        {% endblock %}
+
+        {% block why_us %}
+            {% include 'core/components/quienes_somos.html' %}
+        {% endblock %}
+
+        {% block room %}
+            {% include 'core/components/room.html' %}
+        {% endblock %}
+
+        {% block services %}
+            {% include 'core/components/services.html' %}
+        {% endblock %}
+
+        {% block gallery %}
+            {% include 'core/components/gallery.html' %}
+        {% endblock %}
+
+        {% block testimonials %}
+            {% include 'core/components/testimonials.html' %}
+        {% endblock %}
+
+        {% block contact %}
+            {% include 'core/components/contact.html' %}
+        {% endblock %}
+
+        {% block blog %}
+            {% include 'core/components/blog.html' %}
+        {% endblock %}
+
+        {% block newsletter %}
+            {% include 'core/components/newsletter.html' %}
+        {% endblock %}
+
+    {% endblock %}
+</main><!-- End #main -->
+
+{% block footer %}
+    {% include 'core/footer.html' %}
+{% endblock %}

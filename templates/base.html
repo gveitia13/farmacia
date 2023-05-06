@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>{{ title }}</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Favicons -->
+    <link href="{{ cfg.logo.url }}" rel="icon">
+    <link href="{{ cfg.logo.url }}" rel="apple-touch-icon">
+
+    <!-- Vendor CSS Files -->
+    <link href="{% static 'lib/bootstrap/css/bootswatch-litera.min.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+    <link href="{% static 'lib/boxicons/css/boxicons.min.css' %}" rel="stylesheet">
+
+    <link href="{% static 'css/style.css' %}" rel="stylesheet">
+
+    {% block extra_head %}
+
+    {% endblock %}
+</head>
+
+<body>
+{% block top_bar %}
+
+{% endblock %}
+
+{% block header %}
+
+{% endblock %}
+
+{% block hero_section %}
+
+{% endblock %}
+
+{% block main %}
+
+{% endblock %}
+
+{% block footer %}
+
+{% endblock %}
+
+<!-- Vendor JS Files -->
+<script src="{% static 'lib/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+<script src="{% static 'lib/sweet-alert/sweet-alert.js' %}"></script>
+<script src="{% static 'js/script.js' %}"></script>
+{% block extra_scripts %}
+
+{% endblock %}
+</body>
+
+</html>
