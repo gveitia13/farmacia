@@ -1,0 +1,33 @@
+.img-carousel {
+    height: 18rem;
+}
+
+@media (min-width: 576px) {
+    .img-carousel {
+        height: 23rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .img-carousel {
+        height: 19rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .img-carousel {
+        height: 23rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .img-carousel {
+        height: 25rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .img-carousel {
+        height: 30rem;
+    }
+}
