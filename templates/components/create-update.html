@@ -1,0 +1,29 @@
+{% load widget_tweaks %}
+<section class="section-create-update">
+    <div class="container">
+        <div>
+            <h3>{{ text }}</h3>
+        </div>
+        <br>
+        <div class="card">
+            <div class="card-body">
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {% for field in form.visible_fields %}
+                        <div class="form-group">
+                            <label for="{{ field.id }}" class="form-label mt-4">{{ field.label }}</label>
+                            {{ field|add_class:'form-control' }}
+                            {% if field.help_text %}
+                                <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+                    <br>
+                    <div class="text-center">
+                        <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
