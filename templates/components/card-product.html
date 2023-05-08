@@ -1,0 +1,12 @@
+<div class="col">
+    <div class="card">
+        <img src="{{ object.foto.url }}" class="card-img-top" alt="...">
+        <div class="card-body">
+            <h5 class="card-title">{{ object.categoria }} | {{ object.nombre }}</h5>
+            <p class="card-text">{{ object.descripcion }}</p>
+            <p class="card-text">{{ object.tipo }}</p>
+            <a href="{% url 'producto-editar' object.pk %}" class="btn btn-warning">Editar</a>
+            <a href="{% url 'producto-eliminar' object.pk %}" class="btn btn-danger">Eliminar</a>
+        </div>
+    </div>
+</div>

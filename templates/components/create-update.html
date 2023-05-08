@@ -7,7 +7,7 @@
         <br>
         <div class="card">
             <div class="card-body">
-                <form action="" method="post">
+                <form action="" method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {% for field in form.visible_fields %}
                         <div class="form-group">
@@ -20,6 +20,7 @@
                     {% endfor %}
                     <br>
                     <div class="text-center">
+                        <a href="{{ back_url }}" class="btn btn-lg btn-outline-secondary">Atrás</a>
                         <button type="submit" class="btn btn-lg btn-primary">Enviar</button>
                     </div>
                 </form>
