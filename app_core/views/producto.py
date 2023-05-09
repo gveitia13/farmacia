@@ -14,6 +14,7 @@ class CrearProducto(generic.CreateView):
         context = super().get_context_data()
         context['text'] = 'Crear Producto'
         context['back_url'] = self.success_url
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -27,6 +28,7 @@ class EditarProducto(generic.UpdateView):
         context = super().get_context_data()
         context['text'] = f'Editar Producto {self.get_object()}'
         context['back_url'] = self.success_url
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -44,6 +46,7 @@ class ListarProducto(generic.ListView):
         context = super().get_context_data()
         context['text'] = 'Listado de Productos'
         context['add_url'] = reverse_lazy('producto-crear')
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -55,5 +58,6 @@ class EliminarProducto(generic.DeleteView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
         context['model_name'] = 'Producto'
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         context['back_url'] = self.success_url
         return context

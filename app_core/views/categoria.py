@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views import generic
 
-from app_core.models import Categoria
+from app_core.models import Categoria, Farmacia
 
 
 class CrearCategoria(generic.CreateView):
@@ -15,6 +15,7 @@ class CrearCategoria(generic.CreateView):
         context = super().get_context_data()
         context['text'] = 'Crear Clasificación'
         context['back_url'] = self.success_url
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -28,6 +29,7 @@ class ActualizarCategoria(generic.UpdateView):
         context = super().get_context_data()
         context['text'] = f'Actualizar Clasificación {self.get_object()}'
         context['back_url'] = self.success_url
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -45,6 +47,7 @@ class ListarCategoria(generic.ListView):
         context = super().get_context_data()
         context['text'] = 'Listado de Clasificaciones'
         context['add_url'] = reverse_lazy('categoria-crear')
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context
 
 
@@ -57,4 +60,5 @@ class EliminarCategoria(generic.DeleteView):
         context = super().get_context_data()
         context['model_name'] = 'Categoría'
         context['back_url'] = self.success_url
+        context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         return context

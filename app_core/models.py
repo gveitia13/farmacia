@@ -2,16 +2,11 @@ from django.db import models
 from solo.models import SingletonModel
 
 
-class ImagenCarousel(models.Model):
-    imagen = models.ImageField('Imagen', upload_to='carousel/')
-
-
 class Farmacia(SingletonModel):
     nombre = models.CharField('Nombre', max_length=120)
     direccion = models.TextField('Dirección')
     telefono = models.CharField('Teléfono', max_length=15)
     capacidad = models.PositiveIntegerField('Capacidad', )
-    carousel = models.ManyToManyField(ImagenCarousel, verbose_name='Banners')
 
     def __str__(self): return self.nombre
 
