@@ -35,6 +35,12 @@ class ListarCategoria(generic.ListView):
     model = Categoria
     template_name = 'pages/table-list.html'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.GET.get('search'):
+            return qs.filter(nombre__icontains=self.request.GET.get('search'))
+        return qs
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context['text'] = 'Listado de Clasificaciones'

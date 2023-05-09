@@ -34,6 +34,12 @@ class ListarProducto(generic.ListView):
     model = Producto
     template_name = 'pages/products-cards.html'
 
+    def get_queryset(self):
+        qs = super().get_queryset()
+        if self.request.GET.get('search'):
+            return qs.filter(nombre__icontains=self.request.GET.get('search'))
+        return qs
+
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data()
         context['text'] = 'Listado de Productos'
