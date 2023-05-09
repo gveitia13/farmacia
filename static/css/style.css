@@ -2,9 +2,17 @@
     height: 18rem;
 }
 
+.img-product {
+    height: 10rem;
+}
+
 @media (min-width: 576px) {
     .img-carousel {
         height: 23rem;
+    }
+
+    .img-product {
+        height: 12rem;
     }
 }
 
@@ -12,11 +20,19 @@
     .img-carousel {
         height: 19rem;
     }
+
+    .img-product {
+        height: 12rem;
+    }
 }
 
 @media (min-width: 992px) {
     .img-carousel {
         height: 23rem;
+    }
+
+    .img-product {
+        height: 12rem;
     }
 }
 
@@ -24,10 +40,36 @@
     .img-carousel {
         height: 25rem;
     }
+
+    .img-product {
+        height: 10rem;
+    }
 }
 
 @media (min-width: 1400px) {
     .img-carousel {
         height: 30rem;
     }
+}
+
+.truncate-1, .truncate-2, .truncate-3, .truncate-4 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.truncate-1 {
+    -webkit-line-clamp: 1;
+}
+
+.truncate-2 {
+    -webkit-line-clamp: 2;
+}
+
+.truncate-3 {
+    -webkit-line-clamp: 3;
+}
+
+.truncate-4 {
+    -webkit-line-clamp: 4;
 }

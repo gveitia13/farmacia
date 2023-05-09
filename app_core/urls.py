@@ -2,10 +2,12 @@ from django.shortcuts import render
 from django.urls import path
 
 from app_core.views.categoria import CrearCategoria, ActualizarCategoria, ListarCategoria, EliminarCategoria
+from app_core.views.farmacia import IndexView
 from app_core.views.producto import CrearProducto, ListarProducto, EditarProducto, EliminarProducto
 
 urlpatterns = [
-    path('', lambda request: render(request, 'pages/start_page.html'), name='index'),
+    # path('', lambda request: render(request, 'pages/start_page.html'), name='index'),
+    path('', IndexView.as_view(), name='index'),
     # Clasificación
     path('crear-clasificacion/', CrearCategoria.as_view(), name='categoria-crear'),
     path('editar-clasificacion/<int:pk>/', ActualizarCategoria.as_view(), name='categoria-editar'),
