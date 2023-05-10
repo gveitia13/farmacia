@@ -1,6 +1,7 @@
 from django.urls import path
 
-from app_core.views.categoria import CrearCategoria, ActualizarCategoria, ListarCategoria, EliminarCategoria
+from app_core.views.categoria import CrearCategoria, ActualizarCategoria, ListarCategoria, EliminarCategoria, \
+    FiltrarCategoria
 from app_core.views.farmacia import IndexView, CrearFarmacia, EliminarFarmacia, EditarFarmacia
 from app_core.views.producto import CrearProducto, ListarProducto, EditarProducto, EliminarProducto
 
@@ -12,6 +13,7 @@ urlpatterns = [
     path('editar-clasificacion/<int:pk>/', ActualizarCategoria.as_view(), name='categoria-editar'),
     path('eliminar-clasificacion/<int:pk>/', EliminarCategoria.as_view(), name='categoria-eliminar'),
     path('listar-clasificacion/', ListarCategoria.as_view(), name='categoria-list'),
+    path('filtrar-clasificacion/<int:pk>/', FiltrarCategoria.as_view(), name='categoria-filter'),
     # Producto
     path('crear-producto/', CrearProducto.as_view(), name='producto-crear'),
     path('listar-producto/', ListarProducto.as_view(), name='producto-list'),

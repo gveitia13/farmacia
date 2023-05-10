@@ -24,6 +24,7 @@ from yimi import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('app_core.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()

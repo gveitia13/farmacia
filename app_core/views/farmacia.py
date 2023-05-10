@@ -1,8 +1,9 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
-from app_core.models import Farmacia, Producto
+from app_core.models import Farmacia, Producto, Categoria
 
 
 class IndexView(generic.ListView):
@@ -19,11 +20,13 @@ class IndexView(generic.ListView):
         context = super().get_context_data()
         context['farmacia'] = Farmacia.objects.first() if Farmacia.objects.exists() else None
         context['text'] = 'Últimos productos'
+        context['add_url'] = reverse_lazy('producto-crear')
+        context['clasificion_list'] = Categoria.objects.all()
         print(context['object_list'])
         return context
 
 
-class CrearFarmacia(generic.CreateView):
+class CrearFarmacia(LoginRequiredMixin, generic.CreateView):
     template_name = 'pages/create-farmacia.html'
     model = Farmacia
     success_url = reverse_lazy('index')
@@ -41,10 +44,11 @@ class CrearFarmacia(generic.CreateView):
         context['farmacia'] = farmacia
         context['text'] = f'{"Crear"} Farmacia'
         context['back_url'] = self.success_url
+        context['clasificion_list'] = Categoria.objects.all()
         return context
 
 
-class EditarFarmacia(generic.UpdateView):
+class EditarFarmacia(LoginRequiredMixin, generic.UpdateView):
     template_name = 'pages/update-farmacia.html'
     model = Farmacia
     success_url = reverse_lazy('index')
@@ -56,10 +60,11 @@ class EditarFarmacia(generic.UpdateView):
         context['farmacia'] = farmacia
         context['text'] = f'{"Editar"} Farmacia'
         context['back_url'] = self.success_url
+        context['clasificion_list'] = Categoria.objects.all()
         return context
 
 
-class EliminarFarmacia(generic.DeleteView):
+class EliminarFarmacia(LoginRequiredMixin, generic.DeleteView):
     model = Farmacia
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('index')
@@ -68,4 +73,5 @@ class EliminarFarmacia(generic.DeleteView):
         context = super().get_context_data()
         context['model_name'] = 'Farmacia'
         context['back_url'] = reverse_lazy('farmacia-editar', kwargs={'pk': self.get_object().pk})
+        context['clasificion_list'] = Categoria.objects.all()
         return context
