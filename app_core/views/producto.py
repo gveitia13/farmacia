@@ -2,6 +2,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
 
+from app_core.forms import ProductoForm
 from app_core.models import Producto, Farmacia, Categoria
 
 
@@ -9,7 +10,8 @@ class CrearProducto(LoginRequiredMixin, generic.CreateView):
     model = Producto
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
-    fields = '__all__'
+    # fields = '__all__'
+    form_class = ProductoForm
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
