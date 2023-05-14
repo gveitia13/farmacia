@@ -1,3 +1,4 @@
+from django.contrib.auth.models import AbstractUser, Permission
 from django.db import models
 from solo.models import SingletonModel
 
@@ -30,3 +31,13 @@ class Producto(models.Model):
     tipo = models.CharField('Tipo', max_length=130)
 
     def __str__(self): return self.nombre
+
+
+class User(AbstractUser):
+    rol = models.CharField('Rol', choices=(
+        ('1', 'Administrador'),
+        ('2', 'Empleado'),
+        ('3', 'Recursos Humanos'),
+    ), max_length=2, default='2')
+
+    REQUIRED_FIELDS = ['rol']

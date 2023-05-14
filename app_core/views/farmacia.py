@@ -1,4 +1,4 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
@@ -31,6 +31,8 @@ class CrearFarmacia(LoginRequiredMixin, generic.CreateView):
     model = Farmacia
     success_url = reverse_lazy('index')
     fields = '__all__'
+
+    # permission_required =
 
     def get(self, request, *args, **kwargs):
         farmacia = Farmacia.objects.first() if Farmacia.objects.exists() else None
