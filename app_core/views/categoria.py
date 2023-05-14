@@ -1,15 +1,23 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
 from app_core.models import Categoria, Farmacia, Producto
 
 
-class CrearCategoria(LoginRequiredMixin, generic.CreateView):
+class CrearCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
     model = Categoria
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('categoria-list')
     fields = '__all__'
+    permission_required = ['add_categoria']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -20,11 +28,17 @@ class CrearCategoria(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class ActualizarCategoria(LoginRequiredMixin, generic.UpdateView):
+class ActualizarCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
     model = Categoria
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('categoria-list')
     fields = '__all__'
+    permission_required = ['change_categoria']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -54,10 +68,16 @@ class ListarCategoria(generic.ListView):
         return context
 
 
-class EliminarCategoria(LoginRequiredMixin, generic.DeleteView):
+class EliminarCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = Categoria
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('categoria-list')
+    permission_required = ['delete_categoria']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()

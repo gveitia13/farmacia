@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.shortcuts import redirect
 from django.urls import reverse_lazy
@@ -26,13 +27,17 @@ class IndexView(generic.ListView):
         return context
 
 
-class CrearFarmacia(LoginRequiredMixin, generic.CreateView):
+class CrearFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
     template_name = 'pages/create-farmacia.html'
     model = Farmacia
     success_url = reverse_lazy('index')
     fields = '__all__'
+    permission_required = ['add_farmacia']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
 
-    # permission_required =
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get(self, request, *args, **kwargs):
         farmacia = Farmacia.objects.first() if Farmacia.objects.exists() else None
@@ -50,11 +55,17 @@ class CrearFarmacia(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class EditarFarmacia(LoginRequiredMixin, generic.UpdateView):
+class EditarFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
     template_name = 'pages/update-farmacia.html'
     model = Farmacia
     success_url = reverse_lazy('index')
     fields = '__all__'
+    permission_required = ['change_farmacia']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -66,10 +77,16 @@ class EditarFarmacia(LoginRequiredMixin, generic.UpdateView):
         return context
 
 
-class EliminarFarmacia(LoginRequiredMixin, generic.DeleteView):
+class EliminarFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = Farmacia
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('index')
+    permission_required = ['delete_farmacia']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()

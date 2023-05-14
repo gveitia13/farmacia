@@ -7,42 +7,54 @@
 
 <main id="main" style="height: 100vh">
     {% block main %}
-
+        {% if messages %}
+            <div class="alert alert-dismissible alert-danger">
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                <ul class="">
+                    {% for message in messages %}
+                        {% if message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                            <li>{{ message }}</li>
+                        {% endif %}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
         {% block carousel %}
             {% include 'components/carousel.html' %}
         {% endblock %}
 
-{#        {% block why_us %}#}
-{#            {% include 'core/components/quienes_somos.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block room %}#}
-{#            {% include 'core/components/room.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block services %}#}
-{#            {% include 'core/components/services.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block gallery %}#}
-{#            {% include 'core/components/gallery.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block testimonials %}#}
-{#            {% include 'core/components/testimonials.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block contact %}#}
-{#            {% include 'core/components/contact.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block blog %}#}
-{#            {% include 'core/components/blog.html' %}#}
-{#        {% endblock %}#}
-{##}
-{#        {% block newsletter %}#}
-{#            {% include 'core/components/newsletter.html' %}#}
-{#        {% endblock %}#}
+
+        {#        {% block why_us %}#}
+        {#            {% include 'core/components/quienes_somos.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block room %}#}
+        {#            {% include 'core/components/room.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block services %}#}
+        {#            {% include 'core/components/services.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block gallery %}#}
+        {#            {% include 'core/components/gallery.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block testimonials %}#}
+        {#            {% include 'core/components/testimonials.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block contact %}#}
+        {#            {% include 'core/components/contact.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block blog %}#}
+        {#            {% include 'core/components/blog.html' %}#}
+        {#        {% endblock %}#}
+        {##}
+        {#        {% block newsletter %}#}
+        {#            {% include 'core/components/newsletter.html' %}#}
+        {#        {% endblock %}#}
 
     {% endblock %}
 </main><!-- End #main -->

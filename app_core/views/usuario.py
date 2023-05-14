@@ -1,4 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -6,12 +8,18 @@ from app_core.forms import MyUserForm
 from app_core.models import User, Farmacia, Categoria
 
 
-class CrearUsuario(LoginRequiredMixin, generic.CreateView):
+class CrearUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
     model = User
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('listar-usuario')
     # fields = '__all__'
     form_class = MyUserForm
+    permission_required = ['add_user']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -22,12 +30,18 @@ class CrearUsuario(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class EditarUsuario(LoginRequiredMixin, generic.UpdateView):
+class EditarUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
     model = User
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('listar-usuario')
     # fields = '__all__'
     form_class = MyUserForm
+    permission_required = ['change_user']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -38,10 +52,16 @@ class EditarUsuario(LoginRequiredMixin, generic.UpdateView):
         return context
 
 
-class EliminarUsuario(LoginRequiredMixin, generic.DeleteView):
+class EliminarUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = User
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('listar-usuario')
+    permission_required = ['delete_user']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -52,7 +72,7 @@ class EliminarUsuario(LoginRequiredMixin, generic.DeleteView):
         return context
 
 
-class ListarUsuario(generic.ListView):
+class ListarUsuario(LoginRequiredMixin, generic.ListView):
     model = User
     template_name = 'pages/user-list.html'
 

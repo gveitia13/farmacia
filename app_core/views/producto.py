@@ -1,4 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import redirect
 from django.urls import reverse_lazy
 from django.views import generic
 
@@ -6,12 +8,17 @@ from app_core.forms import ProductoForm
 from app_core.models import Producto, Farmacia, Categoria
 
 
-class CrearProducto(LoginRequiredMixin, generic.CreateView):
+class CrearProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.CreateView):
     model = Producto
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
-    # fields = '__all__'
     form_class = ProductoForm
+    permission_required = ['add_producto']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -22,11 +29,17 @@ class CrearProducto(LoginRequiredMixin, generic.CreateView):
         return context
 
 
-class EditarProducto(LoginRequiredMixin, generic.UpdateView):
+class EditarProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.UpdateView):
     model = Producto
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
     fields = '__all__'
+    permission_required = ['change_producto']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
@@ -56,10 +69,16 @@ class ListarProducto(generic.ListView):
         return context
 
 
-class EliminarProducto(LoginRequiredMixin, generic.DeleteView):
+class EliminarProducto(LoginRequiredMixin, PermissionRequiredMixin, generic.DeleteView):
     model = Producto
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('producto-list')
+    permission_required = ['delete_producto']
+    permission_denied_message = 'No posee permisos para entrar a este módulo'
+
+    def handle_no_permission(self):
+        messages.error(self.request, self.permission_denied_message)
+        return redirect('index')
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data()
