@@ -4,6 +4,7 @@ from app_core.views.categoria import CrearCategoria, ActualizarCategoria, Listar
     FiltrarCategoria
 from app_core.views.farmacia import IndexView, CrearFarmacia, EliminarFarmacia, EditarFarmacia
 from app_core.views.producto import CrearProducto, ListarProducto, EditarProducto, EliminarProducto
+from app_core.views.usuario import CrearUsuario, EditarUsuario, EliminarUsuario, ListarUsuario
 
 urlpatterns = [
     # path('', lambda request: render(request, 'pages/start_page.html'), name='index'),
@@ -23,4 +24,9 @@ urlpatterns = [
     path('crear-farmacia/', CrearFarmacia.as_view(), name='farmacia-crear'),
     path('eliminar-farmacia/<int:pk>/', EliminarFarmacia.as_view(), name='farmacia-eliminar'),
     path('editar-farmacia/<int:pk>/', EditarFarmacia.as_view(), name='farmacia-editar'),
+    # Usuario
+    path('crear-usuario/', CrearUsuario.as_view(), name='crear-usuario'),
+    path('editar-usuario/<int:pk>/', EditarUsuario.as_view(), name='editar-usuario'),
+    path('eliminar-usuario/<int:pk>/', EliminarUsuario.as_view(), name='eliminar-usuario'),
+    path('listar-usuario/', ListarUsuario.as_view(), name='listar-usuario'),
 ]

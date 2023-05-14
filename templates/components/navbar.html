@@ -2,13 +2,6 @@
     <div class="container">
         <a class="navbar-brand"
            href="
-
-
-
-
-
-
-
                    {% if farmacia %}{% url 'farmacia-editar' farmacia.pk %}{% else %}{% url 'farmacia-crear' %}{% endif %}">
             Farmacia UCI</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01"
@@ -35,7 +28,9 @@
                     <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
                        aria-haspopup="true" aria-expanded="false">Usuario</a>
                     <div class="dropdown-menu">
-                        {% if request.user.is_authenticated  %}
+                        <a href="{% url 'listar-usuario' %}" class="dropdown-item">Listar Usuarios</a>
+                        <div class="dropdown-divider"></div>
+                        {% if request.user.is_authenticated %}
                             <a class="dropdown-item" href="{% url 'logout' %}">Cerrar sesión</a>
                         {% else %}
                             <a class="dropdown-item" href="{% url 'login' %}">Iniciar sesión</a>
