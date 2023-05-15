@@ -32,7 +32,7 @@ class CrearFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateV
     model = Farmacia
     success_url = reverse_lazy('index')
     fields = '__all__'
-    permission_required = ['add_farmacia']
+    permission_required = ['app_core.add_farmacia']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -60,7 +60,7 @@ class EditarFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.Update
     model = Farmacia
     success_url = reverse_lazy('index')
     fields = '__all__'
-    permission_required = ['change_farmacia']
+    permission_required = ['app_core.change_farmacia']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -81,7 +81,7 @@ class EliminarFarmacia(LoginRequiredMixin, PermissionRequiredMixin, generic.Dele
     model = Farmacia
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('index')
-    permission_required = ['delete_farmacia']
+    permission_required = ['app_core.delete_farmacia']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):

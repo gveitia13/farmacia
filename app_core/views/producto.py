@@ -13,7 +13,7 @@ class CrearProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.CreateVi
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
     form_class = ProductoForm
-    permission_required = ['add_producto']
+    permission_required = ['app_core.add_producto']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -34,7 +34,7 @@ class EditarProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.UpdateV
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
     fields = '__all__'
-    permission_required = ['change_producto']
+    permission_required = ['app_core.change_producto']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -73,7 +73,7 @@ class EliminarProducto(LoginRequiredMixin, PermissionRequiredMixin, generic.Dele
     model = Producto
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('producto-list')
-    permission_required = ['delete_producto']
+    permission_required = ['app_core.delete_producto']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):

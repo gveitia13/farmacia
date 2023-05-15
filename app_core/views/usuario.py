@@ -14,7 +14,7 @@ class CrearUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateVi
     success_url = reverse_lazy('listar-usuario')
     # fields = '__all__'
     form_class = MyUserForm
-    permission_required = ['add_user']
+    permission_required = ['app_core.add_user']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -36,7 +36,7 @@ class EditarUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateV
     success_url = reverse_lazy('listar-usuario')
     # fields = '__all__'
     form_class = MyUserForm
-    permission_required = ['change_user']
+    permission_required = ['app_core.change_user']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -56,7 +56,7 @@ class EliminarUsuario(LoginRequiredMixin, PermissionRequiredMixin, generic.Delet
     model = User
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('listar-usuario')
-    permission_required = ['delete_user']
+    permission_required = ['app_core.delete_user']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):

@@ -12,7 +12,7 @@ class CrearCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.Create
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('categoria-list')
     fields = '__all__'
-    permission_required = ['add_categoria']
+    permission_required = 'app_core.add_categoria'
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -33,7 +33,7 @@ class ActualizarCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.U
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('categoria-list')
     fields = '__all__'
-    permission_required = ['change_categoria']
+    permission_required = ['app_core.change_categoria']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
@@ -72,7 +72,7 @@ class EliminarCategoria(LoginRequiredMixin, PermissionRequiredMixin, generic.Del
     model = Categoria
     template_name = 'pages/delete.html'
     success_url = reverse_lazy('categoria-list')
-    permission_required = ['delete_categoria']
+    permission_required = ['app_core.delete_categoria']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 
     def handle_no_permission(self):
