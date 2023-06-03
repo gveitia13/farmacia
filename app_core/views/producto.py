@@ -8,7 +8,7 @@ from app_core.forms import ProductoForm
 from app_core.models import Producto, Farmacia, Categoria
 
 
-class CrearProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.CreateView):
+class CrearProducto(LoginRequiredMixin, PermissionRequiredMixin, generic.CreateView):
     model = Producto
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
@@ -29,11 +29,12 @@ class CrearProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.CreateVi
         return context
 
 
-class EditarProducto(LoginRequiredMixin, PermissionRequiredMixin,generic.UpdateView):
+class EditarProducto(LoginRequiredMixin, PermissionRequiredMixin, generic.UpdateView):
     model = Producto
     template_name = 'pages/create-update.html'
     success_url = reverse_lazy('producto-list')
-    fields = '__all__'
+    # fields = '__all__'
+    form_class = ProductoForm
     permission_required = ['app_core.change_producto']
     permission_denied_message = 'No posee permisos para entrar a este módulo'
 

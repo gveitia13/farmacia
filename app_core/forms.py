@@ -14,9 +14,16 @@ class ProductoForm(ModelForm):
         if not farmacia:
             self.add_error('nombre', 'Debe registrar los datos de la farmacia antes de añadir un producto')
             return super().clean()
-        if farmacia.capacidad == Producto.objects.count():
-            self.add_error('nombre', 'Ya la capacidad de la farmacia está llena, debe eliminar un producto o aumentar '
-                                     'la capacidad antes de añadir')
+        cant = 0
+        for p in Producto.objects.all():
+            cant += p.cantidad
+
+        cant += self.cleaned_data['cantidad']
+        if cant > farmacia.capacidad:
+            self.add_error('nombre',
+                           'Ya la capacidad de la farmacia está llena, debe reducir la cantidad de un producto o aumentar '
+                           'la capacidad de la Farmacia antes de añadir')
+
         return super().clean()
 
 

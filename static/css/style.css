@@ -1,3 +1,9 @@
+@import url(static/fonts/Roboto_Condensed);
+
+* {
+    font-family: 'Roboto Condensed', sans-serif!important;
+}
+
 .img-carousel {
     height: 18rem;
 }

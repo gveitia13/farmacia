@@ -29,6 +29,7 @@ class Producto(models.Model):
     descripcion = models.TextField('Descripción', null=True, blank=True)
     foto = models.ImageField('Foto', upload_to='producto/')
     tipo = models.CharField('Tipo', max_length=130)
+    cantidad = models.PositiveIntegerField(default=1)
 
     def __str__(self): return self.nombre
 
